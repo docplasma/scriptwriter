@@ -1,10 +1,8 @@
 import java.awt.Dimension;
 import java.awt.GridLayout;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 
 public class StoriesList extends JPanel {
 
