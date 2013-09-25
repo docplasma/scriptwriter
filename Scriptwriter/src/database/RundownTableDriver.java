@@ -7,11 +7,11 @@ import java.sql.Statement;
 
 import data.Story;
 
-public class CreateRundownTable {
+public class RundownTableDriver {
 
 	
 	
-	CreateRundownTable(String tableName, Story story) {
+	RundownTableDriver(String tableName, Story story) {
 		
 		final String DRIVER = "com.mysql.jdbc.Driver";
 		final String CONNECTION_HEAD = "jdbc:mysql://";
