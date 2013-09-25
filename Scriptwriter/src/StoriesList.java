@@ -1,8 +1,12 @@
 import java.awt.Dimension;
 import java.awt.GridLayout;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import data.Story;
+import database.RundownTableDriver;
 
 public class StoriesList extends JPanel {
 
@@ -36,6 +40,8 @@ public class StoriesList extends JPanel {
 			    {"CLOSE", "LIVE", "", "00:00", "00:00"}
 			};
 		String[] columnNames = {"Story", "Type", "Note", "Time", "Show Time"};
+		//Story story = new Story();
+		RundownTableDriver driver = new RundownTableDriver("Nightly 9-17-19");
 		
 		//-----GUI Constructors
 		

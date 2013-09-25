@@ -9,16 +9,27 @@ import data.Story;
 
 public class RundownTableDriver {
 
+	//-----Connection Data Members
+	static final String DRIVER = "com.mysql.jdbc.Driver";
+	static final String CONNECTION_HEAD = "jdbc:mysql:";
+	static final String CONNECTION_TAIL = "/;create=true";
+	String connectionAddress;
+	String databaseName;
+	static final String USER = "test";
+	static final String PASS = "Trojanvision1";
 	
 	
-	RundownTableDriver(String tableName, Story story) {
+	//-----Constructors
+	public RundownTableDriver() {
+		String Connection = CONNECTION_HEAD + connectionAddress + databaseName + CONNECTION_TAIL;
+	}
+	public RundownTableDriver(String tableName) {
 		
-		final String DRIVER = "com.mysql.jdbc.Driver";
-		final String CONNECTION_HEAD = "jdbc:mysql://";
-		final String CONNECTION_TAIL = "/;create=true";
-		String connectionAddress = "localhost";
 		
-		String Connection = CONNECTION_HEAD + connectionAddress + tableName + CONNECTION_TAIL;
+		connectionAddress = "//localhost:3306/";
+		databaseName = "scriptwriter";
+		
+		String Connection = CONNECTION_HEAD + connectionAddress + databaseName + ";"; //+ CONNECTION_TAIL;
 		try {
 			Class.forName(DRIVER).newInstance();
 		}
@@ -31,14 +42,13 @@ public class RundownTableDriver {
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		try (Connection connection = DriverManager.getConnection(Connection); Statement statement = connection.createStatement()) {
+		try (Connection connection = DriverManager.getConnection(Connection,USER,PASS); Statement statement = connection.createStatement()) {
 			statement.executeUpdate("create table " + tableName +
 					" (Story VARCHAR(32) NOT NULL PRIMARY KEY, " +
 					"Type VARCHAR(32), " +
 					"Note VARCHAR(32) " +
 					"STime TIME() " +
 					"OTime TIME())");
-			statement.executeUpdate("insert into " + tableName + " ");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

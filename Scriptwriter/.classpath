@@ -7,5 +7,6 @@
 			<attribute name="javadoc_location" value="jar:file:/Volumes/Data/Users/dexterparks/git/scriptwriter/joda-time-2.3/joda-time-2.3-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="dependencies/mysql-connector-java-5.1.26-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

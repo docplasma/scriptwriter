@@ -17,7 +17,7 @@ public class Story {
 	private StringBuilder sb;
 
 	//-----Constructors
-	Story() {
+	public Story() {
 		String title = "Generic Story";
 		storyType = "PKG";
 		//storyDuration;
