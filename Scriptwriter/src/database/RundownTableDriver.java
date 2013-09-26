@@ -12,24 +12,25 @@ public class RundownTableDriver {
 	//-----Connection Data Members
 	static final String DRIVER = "com.mysql.jdbc.Driver";
 	static final String CONNECTION_HEAD = "jdbc:mysql:";
-	static final String CONNECTION_TAIL = "/;create=true";
+	static final String CONNECTION_TAIL = ";create=true";
 	String connectionAddress;
 	String databaseName;
-	static final String USER = "test";
+	static final String USER = "editor";
 	static final String PASS = "Trojanvision1";
 	
 	
 	//-----Constructors
 	public RundownTableDriver() {
-		String Connection = CONNECTION_HEAD + connectionAddress + databaseName + CONNECTION_TAIL;
+		String connection = CONNECTION_HEAD + connectionAddress + databaseName + CONNECTION_TAIL;
 	}
 	public RundownTableDriver(String tableName) {
 		
 		
-		connectionAddress = "//localhost:3306/";
+		connectionAddress = "//localhost/";
 		databaseName = "scriptwriter";
 		
-		String Connection = CONNECTION_HEAD + connectionAddress + databaseName + ";"; //+ CONNECTION_TAIL;
+		String connection = CONNECTION_HEAD + connectionAddress + databaseName + "?user=" + USER + "&password=" + PASS;
+	
 		try {
 			Class.forName(DRIVER).newInstance();
 		}
@@ -42,16 +43,18 @@ public class RundownTableDriver {
 		catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		try (Connection connection = DriverManager.getConnection(Connection,USER,PASS); Statement statement = connection.createStatement()) {
-			statement.executeUpdate("create table " + tableName +
-					" (Story VARCHAR(32) NOT NULL PRIMARY KEY, " +
-					"Type VARCHAR(32), " +
-					"Note VARCHAR(32) " +
-					"STime TIME() " +
-					"OTime TIME())");
+		try (Connection con = DriverManager.getConnection(connection); Statement statement = con.createStatement()) {
+			statement.executeUpdate("CREATE TABLE IF NOT EXISTS `" + databaseName +"`.`" + tableName + "` (`StoryIndex` INT(11) NOT NULL," +
+					" `Story` TEXT NULL DEFAULT NULL, `Type` TEXT NULL DEFAULT NULL, `Note` TEXT NULL DEFAULT NULL," + 
+					" `STime` TIME NULL DEFAULT NULL, `OTime` TIME NULL DEFAULT NULL, PRIMARY KEY (`StoryIndex`))");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//-----Methods
+	public void insertStory(Story story) {
+		
 	}
 }
