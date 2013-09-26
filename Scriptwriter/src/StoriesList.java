@@ -41,7 +41,7 @@ public class StoriesList extends JPanel {
 			};
 		String[] columnNames = {"Story", "Type", "Note", "Time", "Show Time"};
 		//Story story = new Story();
-		RundownTableDriver driver = new RundownTableDriver("Nightly 9-17-19");
+		RundownTableDriver driver = new RundownTableDriver("Nightly_9-17-19");
 		
 		//-----GUI Constructors
 		
