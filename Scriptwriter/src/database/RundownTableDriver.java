@@ -91,4 +91,33 @@ public class RundownTableDriver {
 		
 		
 	}
+	public void newRundownFromTemplate(String template, String newRundown) {
+			
+		connectionAddress = "//localhost/";
+		databaseName = "scriptwriter";
+		
+		String connection = CONNECTION_HEAD + connectionAddress + databaseName + "?user=" + USER + "&password=" + PASS;
+	
+		try {
+			Class.forName(DRIVER).newInstance();
+		}
+		catch (InstantiationException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try (Connection con = DriverManager.getConnection(connection); Statement statement = con.createStatement()) {
+			String cloneRundown = "CREATE TABLE" + newRundown + " LIKE " + template + ";";
+			String cloneRundownData = "INSERT INTO " + newRundown + "SELECT * FROM " + template + ";";
+			statement.executeUpdate(cloneRundown + cloneRundownData);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
