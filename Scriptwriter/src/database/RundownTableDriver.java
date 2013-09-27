@@ -120,4 +120,8 @@ public class RundownTableDriver {
 		}
 		
 	}
+	public String toString() {
+		//TODO flesh this out
+		return "This object implements a sql connection to manipulate the scriptwriter database";
+	}
 }
