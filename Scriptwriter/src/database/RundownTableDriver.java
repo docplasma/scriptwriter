@@ -2,8 +2,12 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+
+import org.joda.time.Duration;
 
 import data.Story;
 
@@ -120,6 +124,50 @@ public class RundownTableDriver {
 		}
 		
 	}
+	public Story getStory() {
+		Story story = new Story();
+		
+		connectionAddress = "//localhost/";
+		databaseName = "scriptwriter";
+		
+		String connection = CONNECTION_HEAD + connectionAddress + databaseName + "?user=" + USER + "&password=" + PASS;
+	
+		try {
+			Class.forName(DRIVER).newInstance();
+		}
+		catch (InstantiationException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try (Connection con = DriverManager.getConnection(connection); Statement statement = con.createStatement()) {
+			ResultSet rs = statement.executeQuery("");
+			
+			story.setStoryIndex(rs.getInt("storyIndex"));
+			story.setTitle(rs.getString("Title"));
+			story.setStoryType(rs.getString("storyType"));
+			story.setStoryDuration(new Duration(rs.getTime("mediaDuration")));
+			story.setMediaDuration(new Duration(rs.getString("storyDuration")));
+			story.setCameraIntroShot(rs.getString("cameraIntroShot"));
+			story.setCameraTagShot(rs.getString("cameraTagShot"));
+			story.setCameraIntroNumber(rs.getInt("cameraIntroNumber"));
+			story.setCameraTagNumber(rs.getInt("cameraTagNumber"));
+			story.setGraphicsInfo(rs.getString("graphicsInfo"));
+			story.setNotes(rs.getString("notes"));
+			story.setIntro(rs.getString("intro"));
+			story.setTag(rs.getString("tag"));
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return story;
+	}
+	
 	public String toString() {
 		//TODO flesh this out
 		return "This object implements a sql connection to manipulate the scriptwriter database";

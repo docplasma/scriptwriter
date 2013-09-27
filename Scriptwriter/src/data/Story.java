@@ -35,6 +35,7 @@ public class Story {
 		intro = "Place the story introduction here.";
 		tag = "Place the story tag here.";
 	}
+	//-----Getters/Setters
 	
 	public int getStoryIndex() {
 		return storyIndex;
@@ -44,7 +45,6 @@ public class Story {
 		this.storyIndex = storyIndex;
 	}
 
-	//-----Getters/Setters
 	public String getTitle() {
 		return title;
 	}
