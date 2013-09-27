@@ -44,12 +44,13 @@ public class RundownTableDriver {
 			e.printStackTrace();
 		}
 		try (Connection con = DriverManager.getConnection(connection); Statement statement = con.createStatement()) {
-			statement.executeUpdate("CREATE TABLE IF NOT EXISTS `" + databaseName +"`.`" + tableName + "` (`StoryIndex` INT(11) NOT NULL," + 
+			statement.executeUpdate("CREATE TABLE IF NOT EXISTS `" + databaseName +"`.`" + tableName +
+					"` (`Index` INT NOT NULL," + "`StoryIndex` INT NOT NULL," + 
 					" `title` TEXT NULL DEFAULT NULL, `storyType` TEXT NULL DEFAULT NULL, `cameraIntroShot` TEXT NULL DEFAULT NULL," + 
 					" `cameraTagShot` TEXT NULL DEFAULT NULL, `cameraIntroNumber` INT NULL DEFAULT NULL," + 
 					" `cameraTagNumber` INT NULL DEFAULT NULL, `graphicsInfo` TEXT NULL DEFAULT NULL, `notes` TEXT NULL DEFAULT NULL," + 
 					" `intro` TEXT NULL DEFAULT NULL, `tag` TEXT NULL DEFAULT NULL, `storyDuration` TIME NULL DEFAULT NULL," + 
-					" `mediaDuration` TIME NULL DEFAULT NULL, PRIMARY KEY (`StoryIndex`))");
+					" `mediaDuration` TIME NULL DEFAULT NULL, PRIMARY KEY (`Index`), UNIQUE INDEX `storyIndex_UNIQUE` (`storyIndex` ASC))");
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
@@ -77,9 +78,9 @@ public class RundownTableDriver {
 			e.printStackTrace();
 		}
 		try (Connection con = DriverManager.getConnection(connection); Statement statement = con.createStatement()) {
-			statement.executeUpdate("INSERT INTO " + tableName + " (title, storyType, cameraIntroShot, cameraTagShot, cameraIntroNumber," + 
-					" cameraTagNumber, graphicsInfo, notes, intro, tag, STime, OTime)" +
-					" VALUES ('" + story.getTitle() + "', '" + story.getStoryType() + "', '" + story.getCameraIntroShot() + "'," +
+			statement.executeUpdate("INSERT INTO " + tableName + " (storyIndex, title, storyType, cameraIntroShot, cameraTagShot," +
+					" cameraIntroNumber, cameraTagNumber, graphicsInfo, notes, intro, tag, STime, OTime)" +
+					" VALUES ('" + story.getStoryIndex() + "', '" +  story.getTitle() + "', '" + story.getStoryType() + "', '" + story.getCameraIntroShot() + "'," +
 					story.getCameraTagShot() +  "', '" + story.getCameraIntroNumber() + "', '" + story.getCameraTagNumber() + "'," +
 					story.getGraphicsInfo() + "', '" + story.getNotes() + "', '" + story.getIntro() + "', '" + story.getTag() +
 					story.getStoryDuration() + "', '" + story.getMediaDuration() + "', )");

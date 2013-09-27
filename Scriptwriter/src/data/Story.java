@@ -5,6 +5,7 @@ import org.joda.time.Duration;
 public class Story {
 
 	//-----Data members
+	private int storyIndex;
 	private String title;
 	private String storyType;
 	private Duration storyDuration;
@@ -35,6 +36,14 @@ public class Story {
 		tag = "Place the story tag here.";
 	}
 	
+	public int getStoryIndex() {
+		return storyIndex;
+	}
+
+	public void setStoryIndex(int storyIndex) {
+		this.storyIndex = storyIndex;
+	}
+
 	//-----Getters/Setters
 	public String getTitle() {
 		return title;
