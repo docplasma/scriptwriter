@@ -93,6 +93,39 @@ public class RundownTableDriver {
 		
 		
 	}
+public void updateStory(Story story, String tableName) {
+		
+		connectionAddress = "//localhost/";
+		databaseName = "scriptwriter";
+		
+		String connection = CONNECTION_HEAD + connectionAddress + databaseName + "?user=" + USER + "&password=" + PASS;
+	
+		try {
+			Class.forName(DRIVER).newInstance();
+		}
+		catch (InstantiationException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try (Connection con = DriverManager.getConnection(connection); Statement statement = con.createStatement()) {
+			statement.executeUpdate("UPDATE " + tableName + " SET storyIndex=" + story.getStoryIndex() + ", title=" +
+					story.getTitle() + ", storyType=" + story.getStoryType() + ", cameraIntroShot=" + story.getCameraIntroShot() +
+					", cameraTagShot=" + story.getCameraTagShot() + ", cameraIntroNumber=" + story.getCameraIntroNumber() +
+					", cameraTagNumber=" + story.getCameraTagNumber() + ", graphicsInfo=" + story.getNotes() + ", intro=" +
+					story.getIntro() + ", tag=" + story.getTag() + ", storyDuration=" + story.getStoryDuration() +
+					", mediaDuration=" + story.getMediaDuration() + ";");
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 	public void newRundownFromTemplate(String template, String newRundown) {
 			
 		connectionAddress = "//localhost/";
