@@ -177,6 +177,19 @@ public void updateStory(Story story, String tableName) {
 		}
 		try (Connection con = DriverManager.getConnection(connection); Statement statement = con.createStatement()) {
 			ResultSet rs = statement.executeQuery("");
+			story = rsToStory(rs);
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return story;
+	}
+	
+	protected Story rsToStory(ResultSet rs) {
+		Story story = new Story();
+		try {
 			
 			story.setStoryIndex(rs.getInt("storyIndex"));
 			story.setTitle(rs.getString("Title"));
@@ -195,8 +208,38 @@ public void updateStory(Story story, String tableName) {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return story;
+	}
+	
+	
+	public int getStoryCount(String rundown) {
+		
+		connectionAddress = "//localhost/";
+		databaseName = "scriptwriter";
+		int count = 0;
+		String connection = CONNECTION_HEAD + connectionAddress + databaseName + "?user=" + USER + "&password=" + PASS;
+	
+		try {
+			Class.forName(DRIVER).newInstance();
+		}
+		catch (InstantiationException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try (Connection con = DriverManager.getConnection(connection); Statement statement = con.createStatement()) {
+			ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM " + rundown + ";");
+			count = rs.getInt(1);
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return count;
 	}
 	
 	public String toString() {
