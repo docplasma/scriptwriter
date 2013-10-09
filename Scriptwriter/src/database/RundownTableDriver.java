@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 
 import org.joda.time.Duration;
 
@@ -21,6 +22,9 @@ public class RundownTableDriver {
 	String databaseName;
 	static final String USER = "editor";
 	static final String PASS = "Trojanvision1";
+	
+	//-----Data Members
+	static final String DBCOLUMNNAMES = "storyIndex, Title, storyType, mediaDuration, storyDuration, cameraIntroShot, cameraTagShot, cameraIntroNumber, cameraTagNumber, notes";
 	
 	
 	//-----Constructors
@@ -216,6 +220,36 @@ public void updateStory(Story story, String tableName) {
 	public Rundown getRundown() {
 		
 		Rundown rundown = new Rundown();
+		
+		connectionAddress = "//localhost/";
+		databaseName = "scriptwriter";
+		
+		String connection = CONNECTION_HEAD + connectionAddress + databaseName + "?user=" + USER + "&password=" + PASS;
+	
+		try {
+			Class.forName(DRIVER).newInstance();
+		}
+		catch (InstantiationException e) {
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		try (Connection con = DriverManager.getConnection(connection); Statement statement = con.createStatement()) {
+			ResultSet rs = statement.executeQuery("SELECT " + DBCOLUMNNAMES +" FROM " + rundown + " ORDER BY storyIndex ASC;");
+			Vector<String> rundownVector = new Vector<String>();
+			Story temp = new Story();
+			while (rs.next()) {
+				rsToStory(rs);
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		
 		return rundown;
 		
