@@ -12,6 +12,30 @@ public class Rundown {
 	
 	//-----Constructors
 	public Rundown() {
+		columnNames = new Vector<String>();
+		
+		//Column Names
+		columnNames.add("Story");
+		columnNames.add("Type");
+		columnNames.add("Note");
+		columnNames.add("Story Time");
+		columnNames.add("RT");
+		columnNames.add("OT");
+		
+	}
+	
+	public Rundown(Vector<String> rows) {
+		this.rows = rows;
+		
+		columnNames = new Vector<String>();
+		
+		//Column Names
+		columnNames.add("Story");
+		columnNames.add("Type");
+		columnNames.add("Note");
+		columnNames.add("Story Time");
+		columnNames.add("RT");
+		columnNames.add("OT");
 		
 	}
 	
