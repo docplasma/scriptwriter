@@ -1,5 +1,7 @@
 package data;
 
+import java.util.Vector;
+
 import org.joda.time.Duration;
 
 public class Story {
@@ -141,7 +143,25 @@ public class Story {
 		this.tag = tag;
 	}
 	
-	//-----Functions
+	//-----Methods
+	
+	public Vector<String> toStoryVector() {
+		Vector<String> story = new Vector<String>();
+		
+		//TODO Implement conversion of fields to a vector
+		
+		return story;
+		
+	}
+	
+	public Vector<String> toRundownVector() {
+		Vector<String> story = new Vector<String>();
+		
+		//TODO Implement conversion of fields to a vector
+		
+		return story;
+		
+	}
 	
 	public String toString() {
 		sb = new StringBuilder();
