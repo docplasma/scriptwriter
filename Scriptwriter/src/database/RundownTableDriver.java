@@ -5,8 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import org.joda.time.Duration;
 
+import data.Rundown;
 import data.Story;
 
 public class RundownTableDriver {
@@ -211,6 +213,13 @@ public void updateStory(Story story, String tableName) {
 		return story;
 	}
 	
+	public Rundown getRundown() {
+		
+		Rundown rundown = new Rundown();
+		
+		return rundown;
+		
+	}
 	
 	public int getStoryCount(String rundown) {
 		
