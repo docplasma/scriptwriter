@@ -22,11 +22,13 @@ public class RundownDataLoadWorker extends SwingWorker<TableModel, TableModel>{
 
 	@Override
 	protected TableModel doInBackground() throws Exception {
-		Rundown rundown = new Rundown();
+		Rundown rundown;
 		
 		//TODO Create rundown table driver and getRundown 
 	
 		RundownTableDriver driver = new RundownTableDriver();
+		
+		rundown = driver.getRundown();
 		
 		DefaultTableModel tableModel = new DefaultTableModel(rundown.getRows(),rundown.getColumnNames());
 		
