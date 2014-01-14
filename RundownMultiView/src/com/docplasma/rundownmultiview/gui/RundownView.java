@@ -1,6 +1,7 @@
 package com.docplasma.rundownmultiview.gui;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -40,7 +41,9 @@ public class RundownView extends JPanel {
 	
 	public RundownView() {
 		JTable rundownTable = new JTable(data, columnNames);
-		rundownTable.setPreferredScrollableViewportSize(new Dimension(500,1080));
+		Dimension screenSlice = new Dimension(Toolkit.getDefaultToolkit().getScreenSize());
+		screenSlice.setSize(screenSlice.getWidth()/3, screenSlice.getHeight());;
+		rundownTable.setPreferredScrollableViewportSize(screenSlice);
 		rundownTable.setFillsViewportHeight(true);
 		JScrollPane tableScrollPane = new JScrollPane(rundownTable);
 		add(tableScrollPane);
